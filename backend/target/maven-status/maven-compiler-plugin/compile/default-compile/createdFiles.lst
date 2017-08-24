@@ -1,0 +1,14 @@
+com\myproject\model\product.class
+com\myproject\DAO\supplierDAO.class
+com\myproject\DAOImpl\supplierDAOImpl.class
+com\myproject\DAO\UserRegistrationDAO.class
+com\myproject\model\UserRegistration.class
+com\myproject\model\supplier.class
+com\myproject\DAOImpl\productDAOImpl.class
+com\myproject\DAO\CategoryDAO.class
+com\myproject\DAOImpl\CategoryDAOImpl.class
+com\myproject\DAO\productDAO.class
+com\myproject\model\Category.class
+com\myproject\backend\App.class
+com\myproject\DAOImpl\UserRegistrationDAOImpl.class
+com\myproject\AppConfig.class
