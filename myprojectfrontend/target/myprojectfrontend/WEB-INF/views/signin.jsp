@@ -100,11 +100,11 @@ input{
             <form action="SignIn">
                 
                 <div class="form-group">                    
-                    <input class="form-control" type="text" name="usename" id="usename" placeholder="YOUR EMAIL"/>
+                    <input class="form-control" type="text" name="email" id="email" placeholder="YOUR EMAIL"/>
                 </div>
                 
                 <div class="form-group">
-                    <input class="form-control" type="password" name="userpassword" id="userpassword" placeholder="PASSWORD" value=""/>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="PASSWORD" value=""/>
                 </div>
                
                 <button type="submit" class="signbuttons btn btn-primary"> SignIn</button>
