@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<div style="margin-bottom: -15pt">
 <jsp:include page="navbar.jsp"></jsp:include>
+</div>
 <style>
 *{
     border-radius: 0 !important;

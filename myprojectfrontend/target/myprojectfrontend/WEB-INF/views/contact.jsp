@@ -1,6 +1,8 @@
 
 <title>Page Title</title>
+<div style="margin-bottom: -15pt">
 <jsp:include page="navbar.jsp"></jsp:include>
+</div>
 <style>
 @import 'https://fonts.googleapis.com/css?family=Libre+Franklin:400,700';
 html,

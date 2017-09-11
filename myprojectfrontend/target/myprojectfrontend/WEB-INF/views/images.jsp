@@ -10,10 +10,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
+<style >
 .mySlides {display:none;}
 </style>
-<div class="w3-content w3-section" style="max-width:2000px">
+<div class="w3-content w3-section" style="max-width:2000px" >
   <img class="mySlides" src="resources/images/1.jpg" style="width:100%""height:100%">
   <img class="mySlides" src="resources/images/2.jpg" style="width:100%""height:100%">
   <img class="mySlides" src="resources/images/3.jpg" style="width:100%""height:100%">

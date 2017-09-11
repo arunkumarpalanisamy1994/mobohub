@@ -13,7 +13,9 @@
 		});
 	});
 </script>
-<jsp:include page="navbar.jsp"></jsp:include>	
+<div style="margin-bottom: -15pt">
+<jsp:include page="navbar.jsp"></jsp:include>
+</div>
 <style>
 .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
 .icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
