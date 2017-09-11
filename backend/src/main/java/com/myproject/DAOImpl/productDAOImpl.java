@@ -14,7 +14,7 @@ import com.myproject.model.product;
 public class productDAOImpl implements productDAO {
     @Autowired
     SessionFactory sessionfactory;
-    @Override
+    
 	public boolean insertuser(product i) {
 	
 		try
@@ -33,7 +33,7 @@ public class productDAOImpl implements productDAO {
 		}
 	}
 
-	@Override
+	
 	public boolean updateuser(product u) {
 
 		try
@@ -52,7 +52,7 @@ public class productDAOImpl implements productDAO {
 		}
 	}
 
-	@Override
+	
 	public boolean deleteuser(int id) {
 		
 		try
@@ -72,7 +72,7 @@ public class productDAOImpl implements productDAO {
 		}
 	}
 
-	@Override
+	
 	public List<product> showall() {
 		try
 		{
@@ -90,7 +90,7 @@ public class productDAOImpl implements productDAO {
 		}
 		
 	}
-	@Override
+	
 	public product showone(int id) {
 		try
 		{

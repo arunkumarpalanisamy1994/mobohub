@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,28 +37,28 @@ public class HomeController {
 	productDAO m;
 
 	@RequestMapping(value={"/","/home"})
-	String indexPage() {
+	String indexPage(HttpSession session) {
 		return "index";
 	}
 
 	@RequestMapping("/aboutus")
-	String aboutusPage() {
+	String aboutusPage(HttpSession session) {
 		return "aboutus";
 	}
 
 	@RequestMapping("/contact")
-	String contactPage() {
+	String contactPage(HttpSession session) {
 		return "contact";
 	}
 
 	@RequestMapping("/signin")
-	String signinPage(Model m) {
+	String signinPage(Model m,HttpSession session) {
 		m.addAttribute("regmodel", new UserRegistration());
 		return "signin";
 	}
 
 	@RequestMapping("/getuser")
-	String getuser(@Valid @ModelAttribute("regmodel") UserRegistration r, BindingResult br, Model m) {
+	String getuser(@Valid @ModelAttribute("regmodel") UserRegistration r, BindingResult br, Model m,HttpSession session) {
 		if (br.hasErrors()) {
 			m.addAttribute("regmodel", r);
 			return "signin";
@@ -71,7 +73,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/Category")
-	String Category(Model n) {
+	String Category(Model n,HttpSession session) {
 		n.addAttribute("getCategory", new Category());
 		n.addAttribute("cattable",k.showall());
 		n.addAttribute("check",true);
@@ -79,7 +81,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/addCategory")
-	String addCategory(@Valid @ModelAttribute("getCategory") Category c, BindingResult br, Model n) {
+	String addCategory(@Valid @ModelAttribute("getCategory") Category c, BindingResult br, Model n,HttpSession session) {
 		if (br.hasErrors()) {
 			n.addAttribute("getCategory", c);
 			return "Category";
@@ -96,7 +98,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/supplier")
-	String supplier(Model o) {
+	String supplier(Model o,HttpSession session) {
 		o.addAttribute("getsupplier", new supplier());
 		o.addAttribute("suptable",l.showall());
 		o.addAttribute("check",true);
@@ -104,7 +106,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/addsupplier")
-	String addsupplier(@Valid @ModelAttribute("getsupplier") supplier x, BindingResult br, Model o) {
+	String addsupplier(@Valid @ModelAttribute("getsupplier") supplier x, BindingResult br, Model o,HttpSession session) {
 		if (br.hasErrors()) {
 			o.addAttribute("getsupplier",x);
 			return "supplier";
@@ -121,7 +123,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/product")
-	String product(Model p) {
+	String product(Model p,HttpSession session) {
 		p.addAttribute("getproduct", new product());
 		p.addAttribute("protable",m.showall());
 		p.addAttribute("check",true);
@@ -129,7 +131,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/addproduct")
-	String addproduct(@Valid @ModelAttribute("getproduct") product y, BindingResult br, Model p)throws Exception {
+	String addproduct(@Valid @ModelAttribute("getproduct") product y, BindingResult br, Model p,HttpSession session)throws Exception {
 		if (br.hasErrors()) {
 			p.addAttribute("getproduct",y);
 			return "product";
@@ -160,14 +162,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/delcat/{cid}")
-	String delcat(@PathVariable("cid") int id)
+	String delcat(@PathVariable("cid") int id,HttpSession session)
 	{
 		k.deleteuser(id);
 		return "redirect:/Category";
 	}
 
 	@RequestMapping("/Editcat")
-	String Editcat(@RequestParam("catid")int id,Model n)
+	String Editcat(@RequestParam("catid")int id,Model n,HttpSession session)
 	{
 		n.addAttribute("getCategory",k.showone(id));
 		n.addAttribute("cattable",k.showall());
@@ -175,14 +177,14 @@ public class HomeController {
 		return "Category";
 	}
 	@RequestMapping("/delsup/{sid}")
-	String delsup(@PathVariable("sid") int id)
+	String delsup(@PathVariable("sid") int id,HttpSession session)
 	{
 		l.deleteuser(id);
 		return "redirect:/supplier";
 	}
 
 	@RequestMapping("/Editsup")
-	String Editsup(@RequestParam("supid")int id,Model o)
+	String Editsup(@RequestParam("supid")int id,Model o,HttpSession session)
 	{
 		o.addAttribute("getsupplier",l.showone(id));
 		o.addAttribute("suptable",l.showall());
@@ -190,14 +192,14 @@ public class HomeController {
 		return "supplier";
 	}
 	@RequestMapping("/delpro/{pid}")
-	String delpro(@PathVariable("pid") int id)
+	String delpro(@PathVariable("pid") int id,HttpSession session)
 	{
 		m.deleteuser(id);
 		return "redirect:/product";
 	}
 
 	@RequestMapping("/Editpro")
-	String Editpro(@RequestParam("proid")int id,Model p)
+	String Editpro(@RequestParam("proid")int id,Model p,HttpSession session)
 	{
 		p.addAttribute("getproduct", m.showone(id));
 		p.addAttribute("protable", m.showall());
@@ -205,7 +207,7 @@ public class HomeController {
 		return "product";
 	}
 	@RequestMapping("/updCategory")
-	String updCategory(@Valid @ModelAttribute("getCategory") Category c, BindingResult br, Model n) {
+	String updCategory(@Valid @ModelAttribute("getCategory") Category c, BindingResult br, Model n,HttpSession session) {
 		if (br.hasErrors()) {
 			n.addAttribute("getCategory", c);
 			return "Category";
@@ -222,7 +224,7 @@ public class HomeController {
 
 }
 	@RequestMapping("/updsupplier")
-	String updsupplier(@Valid @ModelAttribute("getsupplier") supplier x, BindingResult br, Model o) {
+	String updsupplier(@Valid @ModelAttribute("getsupplier") supplier x, BindingResult br, Model o,HttpSession session) {
 		if (br.hasErrors()) {
 			o.addAttribute("getsupplier",x);
 			return "supplier";
@@ -238,7 +240,7 @@ public class HomeController {
 		}
 }
 	@RequestMapping("/updproduct")
-	String updproduct(@Valid @ModelAttribute("getproduct") product y, BindingResult br, Model p) {
+	String updproduct(@Valid @ModelAttribute("getproduct") product y, BindingResult br, Model p,HttpSession session) {
 		if (br.hasErrors()) {
 			p.addAttribute("getproduct",y);
 			return "product";
@@ -254,30 +256,75 @@ public class HomeController {
 		}
 	}
 @RequestMapping(value={"/SignIn"},method=RequestMethod.GET)
-public String SignIncontroller(@RequestParam("email") String uname,@RequestParam("password") String pas)
+public String SignIncontroller(@RequestParam("email") String uname,@RequestParam("password") String pas,HttpSession session)
 {
 	System.out.println(uname);
 	System.out.println(pas);
 	List<UserRegistration> allUser=d.showall();
 	boolean userExist=false;
-	for(UserRegistration reg:allUser)
+	String username=null,userRole=null;
+	boolean userloggedin=false;
+/*	for(UserRegistration reg:allUser)
 	{
 		if(reg.getYourEmail().equals(uname)&&reg.getPassword().equals(pas))
 		{
 			userExist=true;
+			username=reg.getName();
+			userRole=reg.getRole();
+			System.out.println(userRole+"0000000");
 		}
+	}*/
+	
+	UserRegistration usr=new UserRegistration();
+	usr=d.singleuser(uname);
+	
+	if(usr.getPassword().equals(pas))
+	{
+		System.out.println(usr.getRole());
+		System.out.println(usr.getYourEmail());
+		userExist=true;
+		username=usr.getName();
+		userRole=usr.getRole();
+		System.out.println(userRole+"0000000");
 	}
 	if(userExist)
 	{
-	System.out.println("welcome Mr./Mrs. "+uname);
-	return "index";
+	session.setAttribute("username",username);
+	System.out.println(username+"hehehe");
+	session.setAttribute("userrole",userRole);
+	System.out.println(userRole+"hehehe");
+	session.setAttribute("userName",userloggedin);
+	return "redirect:/";
 	}
 	else
 	{
 		return "redirect:/signin";
 	}
-
 	
 }
-
+@RequestMapping("/logout")
+public String logout(HttpSession session)
+{
+	session.invalidate();
+	return "redirect:/";
 }
+@RequestMapping("/productlist")
+String productlistpage(Model y,HttpSession session) 
+{
+	System.out.println(m.showall());
+	y.addAttribute("promodel",new product());
+	y.addAttribute("protable" ,m.showall());
+	y.addAttribute("check", true);
+	return "productlist";
+}
+
+@RequestMapping("/hehe")
+public String blah(@RequestParam("id") int prodid,Model y,HttpSession session)
+{
+	y.addAttribute("promodel",new product());
+	y.addAttribute("protable" ,m.showone(prodid));
+	return "singleproduct";
+}
+			
+}
+

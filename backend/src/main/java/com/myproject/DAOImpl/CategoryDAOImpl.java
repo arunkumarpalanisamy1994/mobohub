@@ -15,7 +15,7 @@ import com.myproject.model.Category;
 public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
     SessionFactory sessionfactory;
-	@Override
+	
 	public boolean insertuser(Category i) {
 	
 		try
@@ -35,7 +35,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 	}
 
-	@Override
+	
 	public boolean updateuser(Category u) {
 
 		try
@@ -55,7 +55,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	}
 
-	@Override
+	
 	public boolean deleteuser(int id) {
 	
 		try
@@ -76,7 +76,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		
 	}
 
-	@Override
+	
 	public List<Category> showall() {
 		
 		try
@@ -96,7 +96,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	}
 
-	@Override
+	
 	public Category showone(int id) {
 	
 		try

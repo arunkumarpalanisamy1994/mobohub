@@ -10,5 +10,6 @@ import com.myproject.model.product;
 public interface UserRegistrationDAO {
 	boolean insertuser(UserRegistration i);
 	List<UserRegistration>showall();
+	UserRegistration singleuser(String email);
 
 }

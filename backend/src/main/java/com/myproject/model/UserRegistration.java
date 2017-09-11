@@ -45,5 +45,9 @@ public String getPassword() {
 public void setPassword(String password) {
 	Password = password;
 }
+public String getRole() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

@@ -14,7 +14,7 @@ import com.myproject.model.supplier;
 public class supplierDAOImpl implements supplierDAO {
 	@Autowired
 	SessionFactory sessionfactory;
-	@Override
+	
 	public boolean insertuser(supplier i) {
 	
 		try
@@ -33,7 +33,7 @@ public class supplierDAOImpl implements supplierDAO {
 		}
 	}
 
-	@Override
+	
 	public boolean updateuser(supplier u) {
 
 		try
@@ -52,7 +52,7 @@ public class supplierDAOImpl implements supplierDAO {
 		}
 	}
 
-	@Override
+	
 	public boolean deleteuser(int id) {
 	
 		try
@@ -73,7 +73,7 @@ public class supplierDAOImpl implements supplierDAO {
 		
 	}
 
-	@Override
+	
 	public List<supplier> showall() {
 	
 		try
@@ -93,7 +93,7 @@ public class supplierDAOImpl implements supplierDAO {
 		
 	}
 
-	@Override
+	
 	public supplier showone(int id) {
 	
 		try

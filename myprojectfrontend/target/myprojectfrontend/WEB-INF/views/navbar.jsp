@@ -1,3 +1,5 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +32,22 @@
             <li><a href="#">Page 1-3</a></li>
           </ul>
         </li>
-        <li><a href="contact">Contact us</a></li>
+        <li><a href="contact">Contactus</a></li>
         <li><a href="aboutus">Aboutus</a></li>
+        <li><a href="product Add">products</a></li>
+        <c:if test ="${sessionScope.username==null}">
         <li><a href="signin">Sign in</a></li>
-        <li><a href="Category">Category</a></li>
-		<li><a href="supplier">supplier</a></li>
-		<li><a href="product">product</a></li>
+        </c:if>
+        <c:if test ="${sessionScope.username!=null}">
+        <c:if test ="${sessionScope.username=='admin'}">
+        <li><a href="Category">CategoryAdd</a></li>
+		<li><a href="supplier">supplierAdd</a></li>
+		<li><a href="product">productAdd</a></li>
+		<li><a href="multiple product add">products</a></li>
+		</c:if>
+		<li><a href="" style="text-transform: capitalize;"><span>Welcome </span>${sessionScope.username}</a></li>
+		<li><a href="logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+		</c:if>
 		<li><a href="#">Carts</a></li>
       </ul>
     </div>
