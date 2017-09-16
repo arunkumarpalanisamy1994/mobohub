@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="navbar.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <link  href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
@@ -12,7 +13,7 @@
 	});
 </script>
 <div style="margin-bottom: -15pt">
-<jsp:include page="navbar.jsp"></jsp:include>
+
 </div>
 <style>
 .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }

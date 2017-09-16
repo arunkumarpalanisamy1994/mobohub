@@ -35,6 +35,8 @@ public class HomeController {
 	supplierDAO l;
 	@Autowired
 	productDAO m;
+	@Autowired
+	cartDAO c;
 
 	@RequestMapping(value={"/","/home"})
 	String indexPage(HttpSession session) {
@@ -264,6 +266,7 @@ public String SignIncontroller(@RequestParam("email") String uname,@RequestParam
 	boolean userExist=false;
 	String username=null,userRole=null;
 	boolean userloggedin=false;
+	
 /*	for(UserRegistration reg:allUser)
 	{
 		if(reg.getYourEmail().equals(uname)&&reg.getPassword().equals(pas))
@@ -289,11 +292,13 @@ public String SignIncontroller(@RequestParam("email") String uname,@RequestParam
 	}
 	if(userExist)
 	{
+		
 	session.setAttribute("username",username);
 	System.out.println(username+"hehehe");
 	session.setAttribute("userrole",userRole);
 	System.out.println(userRole+"hehehe");
 	session.setAttribute("userName",userloggedin);
+	session.setAttribute("prototal", c.singleUserCart(username).size());
 	return "redirect:/";
 	}
 	else
@@ -315,6 +320,8 @@ String productlistpage(Model y,HttpSession session)
 	y.addAttribute("promodel",new product());
 	y.addAttribute("protable" ,m.showall());
 	y.addAttribute("check", true);
+	session.removeAttribute("prodtotal");
+	session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
 	return "productlist";
 }
 
@@ -325,6 +332,222 @@ public String blah(@RequestParam("id") int prodid,Model y,HttpSession session)
 	y.addAttribute("protable" ,m.showone(prodid));
 	return "singleproduct";
 }
-			
+
+
+@RequestMapping("/addtocart/{id}/{uname}")
+public String cartadd(@PathVariable("id") int prodid,@PathVariable("uname") String username,HttpSession session)
+{
+	product prod=new product();
+	prod=m.showone(prodid);
+	cart cart=new cart();
+	cart.setCartid(username);
+	cart.setPrice(prod.getPrice());
+	cart.setProdid(prodid);
+	cart.setProdname(prod.getName());
+	cart.setQuantity(1);
+	cart.setTotal(cart.getQuantity()*cart.getPrice());
+	c.insertProductIntoCart(cart);
+	return "redirect:/productlist";
+}
+@RequestMapping(value={"/addtocart/{getprodid}"})
+public String insertProdttoCart(@PathVariable("getprodid") int ProdId,HttpSession session)
+{
+	try
+	{
+		product single=m.showone(ProdId);
+			if(single.getId()==ProdId)
+			{
+				String username=(String) session.getAttribute("username");
+				System.out.println(username);
+				List<cart> singleuser=(c.singleUserCart(username));
+				for(cart c:singleuser)
+				{
+					System.out.println(c.getCartid()+"     "+c.getProdname());
+				}
+					
+				List<cart> singleprodfromcart=c.singleprodfromcart(single.getName(),username);
+				session.removeAttribute("prodtotal");
+
+				if(singleprodfromcart.isEmpty())
+				{
+					cart cart=new cart();
+					cart.setCartid((String)session.getAttribute("username"));
+					cart.setProdid(single.getId());
+					cart.setPrice((int)single.getPrice());
+					cart.setQuantity(1);
+					cart.setProdname(single.getName());
+					cart.setTotal(cart.getQuantity()*cart.getPrice());
+					c.insertProductIntoCart(cart);
+					session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+				}
+				else
+				{
+					singleprodfromcart.get(0).setQuantity(singleprodfromcart.get(0).getQuantity()+1);
+					singleprodfromcart.get(0).setTotal(singleprodfromcart.get(0).getPrice()*singleprodfromcart.get(0).getQuantity());
+					c.updateproducttocart(singleprodfromcart.get(0));
+					session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+				}
+			}
+		
+	}
+	catch(Exception e)
+	{
+		
+	}
+	
+	return "redirect:/productlist";
 }
 
+
+
+@RequestMapping("/cart")
+String cartPage(HttpSession session,Model m)
+{
+	
+	String username=(String) session.getAttribute("UserLoggedIn");
+	List<cart> singleuser=(c.singleUserCart(username));
+	m.addAttribute("carobjstring", singleuser);
+	return "cart";
+}
+
+@RequestMapping("/remove/{prodid}")
+String removesup(@PathVariable("prodid")int id)
+{
+	if(c.deletecartproduct(id))
+	{
+		return "redirect:/cartpage";		
+	}
+	else
+	{
+		return "redirect:/cartpage";		
+	}
+}
+
+@RequestMapping("/mycart")
+public String cartpage(Model k,HttpSession session)
+{
+	int grandtotal=0;
+	List<cart> temp=c.singleUserCart((String)session.getAttribute("username"));
+	for(cart ca:temp)
+	{
+		grandtotal=grandtotal+(int)ca.getTotal();
+	}
+	k.addAttribute("protable",c.singleUserCart((String)session.getAttribute("username")) );
+	k.addAttribute("total", grandtotal);
+	
+	return "viewcart";
+}
+
+@RequestMapping("/delcartprod/{pid}")
+String delcartpro(@PathVariable("pid") int id,HttpSession session)
+{
+	c.deletecartproduct(id);
+	session.removeAttribute("prodtotal");
+	session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+	return "redirect:/mycart";
+}
+@RequestMapping("/inccart")
+public String inccartprod(@RequestParam("getprodid") int ProdId,HttpSession session)
+{
+	try
+	{
+		product single=m.showone(ProdId);
+			if(single.getId()==ProdId)
+			{
+				String username=(String) session.getAttribute("username");
+				System.out.println(username);
+				List<cart> singleuser=(c.singleUserCart(username));
+				for(cart c:singleuser)
+				{
+					System.out.println(c.getCartid()+"     "+c.getProdname());
+				}
+					
+				List<cart> singleprodfromcart=c.singleprodfromcart(single.getName(),username);
+				session.removeAttribute("prodtotal");
+				if(singleprodfromcart.isEmpty())
+				{
+					cart cart=new cart();
+					cart.setCartid((String)session.getAttribute("username"));
+					cart.setProdid(single.getId());
+					cart.setPrice((int)single.getPrice());
+					cart.setQuantity(1);
+					cart.setProdname(single.getName());
+					cart.setTotal(cart.getQuantity()*cart.getPrice());
+					c.insertProductIntoCart(cart);
+					
+					session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+				}
+				else
+				{
+					singleprodfromcart.get(0).setQuantity(singleprodfromcart.get(0).getQuantity()+1);
+					singleprodfromcart.get(0).setTotal(singleprodfromcart.get(0).getPrice()*singleprodfromcart.get(0).getQuantity());
+					c.updateproducttocart(singleprodfromcart.get(0));
+					
+					session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+					
+				}
+			}
+		
+	}
+	catch(Exception e)
+	{
+		
+	}
+	
+	return "redirect:/mycart";
+}
+
+	@RequestMapping("/redcart")
+public String reducacart(@RequestParam("getprodid") int ProdId,HttpSession session)
+{
+	try
+	{
+		product single=m.showone(ProdId);
+			if(single.getId()==ProdId)
+			{
+				String username=(String) session.getAttribute("username");
+				System.out.println(username);
+				List<cart> singleuser=(c.singleUserCart(username));
+				for(cart c:singleuser)
+				{
+					System.out.println(c.getCartid()+"     "+c.getProdname());
+				}
+					
+				List<cart> singleprodfromcart=c.singleprodfromcart(single.getName(),username);
+				
+				
+				if(!singleprodfromcart.isEmpty())
+				{
+					
+					
+					if(singleprodfromcart.get(0).getQuantity()>1)
+					{
+						singleprodfromcart.get(0).setQuantity(singleprodfromcart.get(0).getQuantity()-1);
+						singleprodfromcart.get(0).setTotal(singleprodfromcart.get(0).getPrice()*singleprodfromcart.get(0).getQuantity());
+						c.updateproducttocart(singleprodfromcart.get(0));
+						session.removeAttribute("prodtotal");
+						session.setAttribute("prodtotal", c.singleUserCart((String)session.getAttribute("username")).size());
+					}
+					
+				}
+			}
+		
+	}
+	catch(Exception e)
+	{
+		
+	}
+	
+	return "redirect:/mycart";
+}
+	
+	
+	@RequestMapping("/checkout")
+	public String checkout()
+	{
+		return "thanku";
+	}
+
+}
+
+			

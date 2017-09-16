@@ -47,7 +47,7 @@
 		<li><a href="" style="text-transform: capitalize;"><span>Welcome </span>${sessionScope.username}</a></li>
 		<li><a href="logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 		</c:if>
-		<li><a href="#">Carts</a></li>
+		<li><a href="mycart">Carts <span class="badge" style="background-color:red;">${sessionScope.prodtotal}</span></a></li>
       </ul>
     </div>
   </div>

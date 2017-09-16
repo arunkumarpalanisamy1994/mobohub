@@ -34,7 +34,7 @@
         </li>
         <li><a href="contact">Contactus</a></li>
         <li><a href="aboutus">Aboutus</a></li>
-        <li><a href="product Add">products</a></li>
+        <li><a href="productlist">products</a></li>
         <c:if test ="${sessionScope.username==null}">
         <li><a href="signin">Sign in</a></li>
         </c:if>
@@ -43,12 +43,11 @@
         <li><a href="Category">CategoryAdd</a></li>
 		<li><a href="supplier">supplierAdd</a></li>
 		<li><a href="product">productAdd</a></li>
-		<li><a href="multiple product add">products</a></li>
 		</c:if>
 		<li><a href="" style="text-transform: capitalize;"><span>Welcome </span>${sessionScope.username}</a></li>
 		<li><a href="logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 		</c:if>
-		<li><a href="#">Carts</a></li>
+		<li><a href="mycart">Carts <span class="badge" style="background-color:red;">${sessionScope.prodtotal}</span></a></li>
       </ul>
     </div>
   </div>

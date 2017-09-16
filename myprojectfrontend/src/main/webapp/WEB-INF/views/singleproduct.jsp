@@ -66,7 +66,7 @@ div.section > div > input {margin:0;padding-left:5px;font-size:10px;padding-righ
                    
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
-                        <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart</button>
+                        <a href="addtocart/${protable.getId()}/${sessionScope.username}"><button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart</button></a>
                         
                     </div>                                        
                 </div>                              
