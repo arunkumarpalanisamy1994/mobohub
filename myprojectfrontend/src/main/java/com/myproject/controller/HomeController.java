@@ -66,7 +66,7 @@ public class HomeController {
 			return "signin";
 		} else {
 			if (d.insertuser(r))
-				return "signin";
+				return "redirect:/signin";
 			else {
 				m.addAttribute("regmodel", r);
 				return "signin";

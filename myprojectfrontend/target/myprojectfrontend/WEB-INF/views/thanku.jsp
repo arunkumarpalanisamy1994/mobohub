@@ -8,7 +8,7 @@
 </head>
 <jsp:include page="navbar.jsp"></jsp:include>
 <body>
-<img  src="resources/images/thankyou.jpg" alt="hi">
+<img  src="resources/images/thank.jpg" alt="hi">
 </body>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>

@@ -24,17 +24,12 @@
     <div class="collapse navbar-collapse" id="myNavbar" style="float:right";>
       <ul class="nav navbar-nav">
         <li><a href="home">Home</a></li>
-        <li class="dropdown">
-      	  
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
+       
         <li><a href="contact">Contactus</a></li>
         <li><a href="aboutus">Aboutus</a></li>
+        
         <li><a href="productlist">products</a></li>
+ 
         <c:if test ="${sessionScope.username==null}">
         <li><a href="signin">Sign in</a></li>
         </c:if>
@@ -43,11 +38,19 @@
         <li><a href="Category">CategoryAdd</a></li>
 		<li><a href="supplier">supplierAdd</a></li>
 		<li><a href="product">productAdd</a></li>
+        
+		
+		
+		
 		</c:if>
+		
+		<li><a href="mycart">Carts <span class="badge" style="background-color:red;">${sessionScope.prodtotal}</span></a></li>
+		
 		<li><a href="" style="text-transform: capitalize;"><span>Welcome </span>${sessionScope.username}</a></li>
+		
 		<li><a href="logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 		</c:if>
-		<li><a href="mycart">Carts <span class="badge" style="background-color:red;">${sessionScope.prodtotal}</span></a></li>
+		
       </ul>
     </div>
   </div>

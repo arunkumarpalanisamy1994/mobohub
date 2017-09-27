@@ -51,7 +51,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Price</label>  
   <div class="col-md-4">
-  <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="price"/>
+  <form:input id="textinput" name="textinput" type="number" placeholder="" class="form-control input-md" path="price" onkeypress="return event.charCode >= 48" min="1"/>
     
   </div>
 </div>
@@ -60,7 +60,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Quantity</label>
   <div class="col-md-4">
-    <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="quantity"/> 
+    <form:input id="textinput" name="textinput" type="number" placeholder="" class="form-control input-md" path="quantity" onkeypress="return event.charCode >= 48" min="1"/> 
     </select>
   </div>
 </div>
@@ -133,7 +133,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Price</label>  
   <div class="col-md-4">
-  <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="price"/>
+  <form:input id="textinput" name="textinput" type="number" placeholder="" class="form-control input-md" path="price" onkeypress="return event.charCode >= 48" min="1"/>
     
   </div>
 </div>
@@ -142,7 +142,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Quantity</label>
   <div class="col-md-4">
-    <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="quantity"/> 
+    <form:input id="textinput" name="textinput" type="number" placeholder="" class="form-control input-md" path="quantity" onkeypress="return event.charCode >= 48" min="1"/> 
     </select>
   </div>
 </div>
