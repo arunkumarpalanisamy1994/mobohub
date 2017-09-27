@@ -128,6 +128,8 @@ public class HomeController {
 	String product(Model p,HttpSession session) {
 		p.addAttribute("getproduct", new product());
 		p.addAttribute("protable",m.showall());
+		p.addAttribute("suptable",l.showall());
+		p.addAttribute("cattable",k.showall());
 		p.addAttribute("check",true);
 		return "product";
 	}

@@ -67,14 +67,27 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Supplier name</label>  
   <div class="col-md-4">
-  <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="Suppliername"/>
+  
+     <form:select path="Suppliername" class="form-control">
+					<c:forEach items="${suptable}" var="x">
+						<c:set var="nam" value="${x.getName()}"/>
+						<form:option value="${nam}">${nam}</form:option>
+					</c:forEach>
+					</form:select>
+    
     
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Category name</label>  
   <div class="col-md-4">
-  <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="categoryname"/>
+  
+     <form:select path="categoryname" class="form-control">
+					<c:forEach items="${cattable}" var="x">
+						<c:set var="nam" value="${x.getName()}"/>
+						<form:option value="${nam}">${nam}</form:option>
+					</c:forEach>
+					</form:select>
     
   </div>
 </div>
@@ -150,7 +163,7 @@
   <label class="col-md-4 control-label" for="textinput">Supplier name</label>  
   <div class="col-md-4">
   <form:input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" path="Suppliername"/>
-    
+       
   </div>
 </div>
 <div class="form-group">
